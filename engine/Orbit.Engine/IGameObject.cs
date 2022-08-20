@@ -7,6 +7,8 @@ public interface IGameObject
 {
     RectF Bounds { get; }
 
+    void Initialize();
+
     /// <summary>
     /// Provides the <see cref="IGameObject"/> the ability to render anything it needs to on screen.
     /// </summary>

@@ -4,10 +4,11 @@ namespace Orbit.GameObjects;
 
 public class Ship : GameObject
 {
-    readonly Microsoft.Maui.Graphics.IImage slowDownImage;
-    readonly Microsoft.Maui.Graphics.IImage speedUpImage;
-    readonly Microsoft.Maui.Graphics.IImage image;
+    Microsoft.Maui.Graphics.IImage slowDownImage;
+    Microsoft.Maui.Graphics.IImage speedUpImage;
+    Microsoft.Maui.Graphics.IImage image;
     private readonly IGameSceneManager gameSceneManager;
+    private readonly IImageResourceContainer imageResourceContainer;
     private float batteryMaximum = 100f;
     private float batteryLevel = 100f;
     private float batteryDrain = 0.5f;
@@ -23,15 +24,23 @@ public class Ship : GameObject
 
     public Ship(
         IGameSceneManager gameSceneManager,
+        IImageResourceContainer imageResourceContainer,
         Gun gun)
     {
-        image = LoadImage("ship_none.png");
-        speedUpImage = LoadImage("ship_forward.png");
-        slowDownImage = LoadImage("ship_reverse.png");
         this.gameSceneManager = gameSceneManager;
+        this.imageResourceContainer = imageResourceContainer;
 
         Add(gun);
         gun.Ship = this;
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        image = imageResourceContainer.Get("ship_none").GetImage();
+        speedUpImage = imageResourceContainer.Get("ship_forward").GetImage();
+        slowDownImage = imageResourceContainer.Get("ship_reverse").GetImage();
     }
 
     public override void Render(ICanvas canvas, RectF dimensions)

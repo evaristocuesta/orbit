@@ -1,9 +1,4 @@
 ﻿using System.Reflection;
-#if WINDOWS
-using Microsoft.Maui.Graphics.Win2D;
-#else
-using Microsoft.Maui.Graphics.Platform;
-#endif
 
 namespace Orbit.Engine;
 
@@ -18,17 +13,11 @@ public abstract class GameObject : GameObjectContainer, IGameObject, IDrawable
 
     public virtual bool IsCollisionDetectionEnabled { get; }
 
-    protected Microsoft.Maui.Graphics.IImage LoadImage(string imageName)
+    public virtual void Initialize()
     {
-        var assembly = GetType().GetTypeInfo().Assembly;
-
-        using (var stream = assembly.GetManifestResourceStream("Orbit.Resources.EmbeddedResources." + imageName))
+        foreach (var gameObject in GameObjectsSnapshot)
         {
-#if WINDOWS
-            return new W2DImageLoadingService().FromStream(stream);
-#else
-            return PlatformImage.FromStream(stream);
-#endif
+            gameObject.Initialize();
         }
     }
 

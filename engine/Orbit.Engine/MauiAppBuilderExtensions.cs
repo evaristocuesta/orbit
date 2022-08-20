@@ -10,6 +10,7 @@ public static class MauiAppBuilderExtensions
     public static MauiAppBuilder UseOrbitEngine(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddSingleton<IGameSceneManager, GameSceneManager>();
+        mauiAppBuilder.Services.AddSingleton<IImageResourceContainer, ImageResourceContainer>();
 
         return mauiAppBuilder;
     }

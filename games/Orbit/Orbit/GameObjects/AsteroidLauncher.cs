@@ -28,6 +28,7 @@ public class AsteroidLauncher : GameObject
         if ((lastUpdate - lastSpawn).TotalSeconds > 2)
         {
             Asteroid asteroid = serviceProvider.GetRequiredService<Asteroid>();
+            asteroid.Initialize();
 
             // Calculate random angle between 0 and 359
             var angle = random.Next(0, 360);

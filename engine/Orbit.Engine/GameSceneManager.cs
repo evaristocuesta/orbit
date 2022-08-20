@@ -33,11 +33,14 @@ public class GameSceneManager : IGameSceneManager
     public void LoadScene(IGameScene gameScene, GameSceneView gameSceneView)
     {
         CurrentScene = gameScene;
+        CurrentScene.Initialize();
 
         this.gameSceneView = gameSceneView;
         gameSceneView.Scene = gameScene;
 
         State = GameState.Loaded;
+
+        
     }
 
     public GameObject FindCollision(GameObject gameObject)

@@ -19,6 +19,11 @@ public class MockGameScene : IGameScene
         throw new System.NotImplementedException();
     }
 
+    public void Initialize()
+    {
+        
+    }
+
     public void Remove(GameObject gameObject)
     {
         throw new System.NotImplementedException();

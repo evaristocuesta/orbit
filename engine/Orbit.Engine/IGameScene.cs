@@ -5,6 +5,7 @@
 /// </summary>
 public interface IGameScene : IDrawable, IGameObjectContainer
 {
+    void Initialize();
     // TODO: Move out to a collision detection manager or similar.
     GameObject FindCollision(GameObject gameObject);
 }

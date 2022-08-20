@@ -5,16 +5,25 @@ namespace Orbit.GameObjects;
 public class Asteroid : GameObject
 {
     private readonly IGameSceneManager gameSceneManager;
+    private readonly IImageResourceContainer imageResourceContainer;
     Microsoft.Maui.Graphics.IImage image;
     float x;
     float y;
     Movement movement;
 
-    public Asteroid(IGameSceneManager gameSceneManager)
+    public Asteroid(
+        IGameSceneManager gameSceneManager, 
+        IImageResourceContainer imageResourceContainer)
     {
-        image = LoadImage("asteroid.png");
-
         this.gameSceneManager = gameSceneManager;
+        this.imageResourceContainer = imageResourceContainer;
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        image = imageResourceContainer.Get("asteroid").GetImage();
     }
 
     public void SetMovement(Movement movement)

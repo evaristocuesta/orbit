@@ -8,19 +8,28 @@ public class Planet : GameObject
     float angle = 0;
     const float rotationIncrement = -0.25f;
     private readonly IGameSceneManager gameSceneManager;
+    private readonly IImageResourceContainer imageResourceContainer;
 
     public int HealthPoints { get; private set; } = 100;
 
     public Planet(
         IGameSceneManager gameSceneManager,
+        IImageResourceContainer imageResourceContainer,
         Shadow shadow)
     {
-        image = LoadImage("planet.png");
         this.gameSceneManager = gameSceneManager;
+        this.imageResourceContainer = imageResourceContainer;
 
         Add(shadow);
 
         shadow.Planet = this;
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        image = imageResourceContainer.Get("planet").GetImage();
     }
 
     public override bool IsCollisionDetectionEnabled => true;

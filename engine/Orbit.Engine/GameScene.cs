@@ -21,4 +21,12 @@ public abstract class GameScene : GameObjectContainer, IGameScene
     }
 
     void IDrawable.Draw(ICanvas canvas, RectF dirtyRect) => Render(canvas, dirtyRect);
+
+    public virtual void Initialize()
+    {
+        foreach (var objectGame in GameObjectsSnapshot)
+        {
+            objectGame.Initialize();
+        }
+    }
 }

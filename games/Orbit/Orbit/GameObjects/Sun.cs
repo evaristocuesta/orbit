@@ -4,11 +4,21 @@ namespace Orbit.GameObjects;
 
 public class Sun : GameObject
 {
+    private IImageResourceContainer imageResourceContainer;
     Microsoft.Maui.Graphics.IImage image;
 
-    public Sun()
+    public Sun(IImageResourceContainer imageResourceContainer)
     {
-        image = LoadImage("sun.png");
+        this.imageResourceContainer = imageResourceContainer;
+
+
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        image = imageResourceContainer.Get("sun").GetImage();
     }
 
     public override void Render(ICanvas canvas, RectF dimensions)
